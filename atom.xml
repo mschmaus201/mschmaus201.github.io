@@ -2,15 +2,24 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[My Octopress Blog]]></title>
-  <link href="http://yoursite.com/atom.xml" rel="self"/>
-  <link href="http://yoursite.com/"/>
-  <updated>2013-06-05T10:56:00-04:00</updated>
-  <id>http://yoursite.com/</id>
+  <link href="http://mschmaus201.github.io/atom.xml" rel="self"/>
+  <link href="http://mschmaus201.github.io/"/>
+  <updated>2013-06-05T12:58:46-04:00</updated>
+  <id>http://mschmaus201.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Hello world: First post]]></title>
+    <link href="http://mschmaus201.github.io/blog/2013/06/05/hello-world-first-post/"/>
+    <updated>2013-06-05T11:03:00-04:00</updated>
+    <id>http://mschmaus201.github.io/blog/2013/06/05/hello-world-first-post</id>
+    <content type="html"><![CDATA[<h2>Hello World!</h2>
+]]></content>
+  </entry>
   
 </feed>
