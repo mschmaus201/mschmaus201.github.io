@@ -4,7 +4,7 @@
   <title><![CDATA[My Octopress Blog]]></title>
   <link href="http://mschmaus201.github.io/atom.xml" rel="self"/>
   <link href="http://mschmaus201.github.io/"/>
-  <updated>2013-06-17T00:13:03-04:00</updated>
+  <updated>2013-06-17T00:19:01-04:00</updated>
   <id>http://mschmaus201.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Arduino the Ruby Way]]></title>
-    <link href="http://mschmaus201.github.io/blog/2013/06/17/hello-world-first-post/"/>
+    <link href="http://mschmaus201.github.io/blog/2013/06/17/arduino-the-ruby-way/"/>
     <updated>2013-06-17T00:00:00-04:00</updated>
-    <id>http://mschmaus201.github.io/blog/2013/06/17/hello-world-first-post</id>
+    <id>http://mschmaus201.github.io/blog/2013/06/17/arduino-the-ruby-way</id>
     <content type="html"><![CDATA[<h1>Arduino the Ruby Way</h1>
 
 <h4><a href="https://speakerdeck.com/austinbv/arduino-the-ruby-way">Speakerdeck Slideshow</a></h4>
