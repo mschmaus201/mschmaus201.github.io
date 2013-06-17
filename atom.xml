@@ -4,7 +4,7 @@
   <title><![CDATA[My Octopress Blog]]></title>
   <link href="http://mschmaus201.github.io/atom.xml" rel="self"/>
   <link href="http://mschmaus201.github.io/"/>
-  <updated>2013-06-05T13:00:24-04:00</updated>
+  <updated>2013-06-17T00:13:03-04:00</updated>
   <id>http://mschmaus201.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -14,11 +14,49 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Hello world: First post]]></title>
-    <link href="http://mschmaus201.github.io/blog/2013/06/05/hello-world-first-post/"/>
-    <updated>2013-06-05T11:03:00-04:00</updated>
-    <id>http://mschmaus201.github.io/blog/2013/06/05/hello-world-first-post</id>
-    <content type="html"><![CDATA[<h2>Hello World!</h2>
+    <title type="html"><![CDATA[Arduino the Ruby Way]]></title>
+    <link href="http://mschmaus201.github.io/blog/2013/06/17/hello-world-first-post/"/>
+    <updated>2013-06-17T00:00:00-04:00</updated>
+    <id>http://mschmaus201.github.io/blog/2013/06/17/hello-world-first-post</id>
+    <content type="html"><![CDATA[<h1>Arduino the Ruby Way</h1>
+
+<h4><a href="https://speakerdeck.com/austinbv/arduino-the-ruby-way">Speakerdeck Slideshow</a></h4>
+
+<h6>Ruby in Our World</h6>
+
+<p>Over the past two weeks, I&rsquo;ve heard a lot about the origin of the Ruby language and Matz&rsquo;s reasoning.  (Paraphrasing) &ldquo;I didn&rsquo;t want to create a computer language that humans can understand, I wanted to create a human language that computers can understand.&rdquo;  And since beginning work with Ruby, my minimal exposure has opened my eyes to the world of possibilities with this language.  But not just the TRON-like world of software.  I&rsquo;m talking about our world as well.</p>
+
+<p>There&rsquo;s this little thing out there called an Arduino.  What is that you ask?  I got my buddies at WIRED to right up a little <a href="http://www.wired.com/gadgetlab/2008/04/just-what-is-an/">post</a> about Arduinos (Arduinoes? Arduini?) for you.  But long story short, its a microcontroller that can be connected with a number of sensors) &ndash; including ultrasound, humidity, microphone, etc &ndash; that opens the gates and connects our world with the world of TRON.</p>
+
+<p>So, I&rsquo;ve got a pop quiz for you.  What&rsquo;s better than the capabilities of an Arduino?  Hint: It starts with an &lsquo;r&rsquo; and rhymes with &ldquo;doobie.&rdquo;  Its an Arduino powered by Ruby, the &ldquo;computer language&rdquo; of our world.</p>
+
+<h6>Arduino Capabilities</h6>
+
+<p>What <del>can</del> can&rsquo;t you do with an Arduino?  Here are a few Arduino projects I&rsquo;ve found incredible creative/useful:</p>
+
+<ol>
+<li>Using a sensor to detect the moisture of the soil for your plant, a tweet will be sent out as soon as your plant needs to be watered.</li>
+<li>Make a motion detector for various purposes (including automatically turning on and off lights)</li>
+<li>If you don&rsquo;t have a thermostat, you can set it to turn on your A/C or heat depending on the indoor and outdoor temperature (indoor using a temperature sensor, and outdoor pulling the info from the internet)</li>
+<li>Control an RC car using your phone (my personal favorite).</li>
+</ol>
+
+
+<h6>Using Ruby with an Arduino</h6>
+
+<p>To begin using Ruby to program an Arduino, there will be a few gems to download that will help you out.  There&rsquo;s a link <a href="http://playground.arduino.cc/interfacing/ruby">here</a> which explains a number of gems.</p>
+
+<ul>
+<li>To start off, &ldquo;Dino&rdquo; will help you get up and running very quickly.  And of course, its an open source gem so its constantly being updated and improved.  &ldquo;Dino&rdquo; even creates the class Board to make working with your Arduino even easier!</li>
+<li>&ldquo;SerialPort&rdquo; will allow you to read from the Arduino&rsquo;s serial port.  The serial port is the port that allows the Arduino to interact with other devices.</li>
+<li>My personal favorite is the &ldquo;Arduino&rdquo; gem which allows you to prototype programs for your Arduino without having to burn them to the device.  That way, you can see on your computer how the program would work without having to deploy it!</li>
+<li>This isn&rsquo;t a gem, but a class which I find fascinating.  The TxRx class allows your Arduino to connect to another Arduino and its serial port (and therefore all the info coming from any attached sensors).  I can&rsquo;t even begin to think the type of network you can build with a few of these things and what you can do with them&hellip;</li>
+</ul>
+
+
+<h6>Using Ruby with an Arduino</h6>
+
+<p>So I&rsquo;ve just recently become familiar with the capabilities of an Arduino after another student in my class, Kristen Curtis, posted about it on her <a href="http://picodegallo.github.io/blog/2013/06/10/mentally-reframing-ruby-part-2/">blog</a>.  As I begin to learn more about Ruby, I absolutely plan to implement my new found skills on an Arduino and definitely will keep you posted here!</p>
 ]]></content>
   </entry>
   
