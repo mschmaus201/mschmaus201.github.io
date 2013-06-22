@@ -8,17 +8,17 @@ categories:
 ---
 
 ##Hello World
-My name is Matt and this is my first blog post!  I find understanding why people are where they are today is incredibly valuable, so before I begin with the more technical posts, I'd just like to introduce myself...
+My name is Matt and this is my first blog post.  I find understanding why people are where they are today is incredibly valuable, so before I begin with the more technical posts, I'd just like to introduce myself...
 
 ###Background
 
 ####My First Computers
 
-Born in NYC and raised in New Jersey (stop the jokes right now), my first interaction with computers began with the family's Windows 95-powered Gateway 2000.  I absolutely LOVED playing games on that thing - Skyroads (still play with that one when I'm feeling nastalgic), Oregon Trail, Roller Coaster Tycoon, and Myst (I never really figured out what to do in that haha).  It took a few years of just playing on PC's to really appreciate what they can do.  It wasn't until we got two Dell towers for the house (one for the parents and one for the kids) that I really became obsessed.  
+Born in NYC and raised in New Jersey, my first interaction with computers began with the family's Windows 95-powered Gateway 2000.  I absolutely LOVED playing games on that thing - Skyroads (still play with that one when I'm feeling nostalgic), Oregon Trail, Roller Coaster Tycoon, and Myst (I never really figured out what to do in that).  It took a few years of just playing on PC's to really appreciate what they can do.  It wasn't until we got two Dell towers for the house (one for the parents and one for the kids) that I really became obsessed.  
 
-Within a few months of getting these, newer and faster models had come out.  But unlike this new Mac I got a few months ago (my first one!), all the parts were easily replaceable.  Of course my parents wouldn't let me touch their computer, so against my siblings' will, I opened ours up and began tinkering around.  I ordered a few extra RAM sticks, a new hard drive, and "borrowed" a friend's copy of Windows 2000.  And luckily, my closest friends were all into computers and technology (and of course video games) the same way I was.  
+Within a few months of getting these, newer and faster models had come out.  But unlike this new Mac I got a few months ago, all the parts were easily replaceable.  Of course my parents wouldn't let me touch their computer, so against my siblings' will, I opened ours up and began tinkering around.  I ordered a few extra RAM sticks, a new hard drive, and "borrowed" a friend's copy of Windows 2000.  And luckily, my closest friends were all into computers and technology (and of course video games) the same way I was.  
 
-Separate from computers, my dad instilled in me this curiosity and desire to build and fix things. I NEEDED (and still do!) to understand how things actually work. From building outdoor furniture (and refusing to read the instructions), to watching him and my grandfather work on their cars, to watching documentaries on TV on how things were made, I just couldn't imagine myself using something without understanding how it actually worked.  And if something broke, I would sit there for HOURS and get pissed off to no end until I figured out how to fix it.  More than anything else, that mindset applies to technology.  
+Separate from computers, my dad instilled in me this curiosity and desire to build and fix things. I needed (and still do) to understand how things actually work. From building outdoor furniture (and refusing to read the instructions), to watching him and my grandfather work on their cars, to watching documentaries on TV on how things were made, I just couldn't imagine myself using something without understanding how it actually worked.  And if something broke, I would sit there for HOURS and get pissed off to no end until I figured out how to fix it.  More than anything else, that mindset applies to technology.  
 
 One of my favorites quotes about programming (can't remember where I read it) is "developers are nothing if not compulsive problem solvers." By the time high school came around I knew exactly what I wanted to focus on.  
 
@@ -30,7 +30,7 @@ Unfortunately, as I've found with most forms of formal education, computers didn
 ####College
 For college, I escaped the northeast and attended Washington University in St. Louis where I studied Economics and Entrepreneurship.  I found the former absolutely useless, but the allure of entrepreneurship had its' hold on me.  
 
-At the end of freshman year, two of my roommates and I purchased [Bears' Bikes](http://bearsbikes.com/), the campus bicycle rental business.  WHAT AN EXPERIENCE!  Everything (ok maybe not everything) I learned in class I was able to apply to the business.  But interestingly enough, most things I learned in the business I was able to apply to class!  From managing customers and our employees, to accounting, to marketing, what I appreciated most was being able to see direct results in the business based on our actions.  And as we grew the company, so did my enthusiasm for the company.  
+At the end of freshman year, two of my roommates and I purchased [Bears' Bikes](http://bearsbikes.com/), the campus bicycle rental business - what an experience!  For many things I learned in class, I was able to apply to the business.  But interestingly enough, most things I learned in the business I was able to apply to class.  From managing customers and our employees, to accounting, to marketing, what I appreciated most was being able to see direct results in the business based on our actions.  And as we grew the company, so did my enthusiasm for the company.  
 
 While working on various parts of the business, I would picture it in my mind as some object that I'm taking apart, improving, and putting back together. If you were wondering, we successfully sold Bears' Bikes towards the end of our senior year. As much as I loved the experience, maintaining a fleet of 150+ bikes definitely turned me off from cycling for a little while.
 
@@ -42,7 +42,7 @@ Of course we were both incredibly disappointed, but we were also encouraged by t
 ####Revisiting My Roots
 Lesson learned for me though is the importance of being more self reliant.  I'm now revisiting my roots and (re)learn programming.  I know that I will start another business of my own one day, and the way this world is going, computers will no doubt play an integral role.  So why rely on someone else to manage what I can learn myself?  That's why I am a student at Flatiron School today. And less than three weeks in, I can already tell this is one of the best decisions of my life.  
 
-My friend/past business partner had explained to me that he wansn't a fan of one of his summer internships because he already knew everything he needed to do well.  At the time I didn't really understand why he said that.  I couldn't imagine the downside to actually being fully qualified for your job!  But it wasn't until studying here did I really understand what he was talking about.  
+My friend had explained to me that he wasn't a fan of one of his summer internships because he already knew everything he needed to do well.  At the time I didn't really understand why he said that.  I couldn't imagine the downside to actually being fully qualified for your job!  But it wasn't until studying here did I really understand what he was talking about.  
 
 More than ever, I now see how programming fits my need to understand how things work.  Working on econ problem sets in college, I would have no problem passing over a problem after a while if there was no hope in me figuring it out.  But with programming, I've spent countless hours staying up at night trying to work out issues in a program, not willing to give up.  I feel like a kid again because this reminds me of my younger self, and I couldn't have asked for more.
 
