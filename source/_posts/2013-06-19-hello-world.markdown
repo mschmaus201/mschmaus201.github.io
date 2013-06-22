@@ -14,7 +14,7 @@ My name is Matt and this is my first blog post.  I find understanding why people
 
 ####My First Computers
 
-Born in NYC and raised in New Jersey, my first interaction with computers began with the family's Windows 95-powered Gateway 2000.  I absolutely LOVED playing games on that thing - Skyroads (still play with that one when I'm feeling nostalgic), Oregon Trail, Roller Coaster Tycoon, and Myst (I never really figured out what to do in that).  It took a few years of just playing on PC's to really appreciate what they can do.  It wasn't until we got two Dell towers for the house (one for the parents and one for the kids) that I really became obsessed.  
+Born in NYC and raised in New Jersey, my first interaction with computers began with the family's Windows 95-powered Gateway 2000.  I absolutely loved playing games on that thing - Skyroads (still play with that one when I'm feeling nostalgic), Oregon Trail, Roller Coaster Tycoon, and Myst (I never really figured out what to do in that).  It took a few years of just playing on PC's to really appreciate what they can do.  It wasn't until we got two Dell towers for the house (one for the parents and one for the kids) that I really became obsessed.  
 
 Within a few months of getting these, newer and faster models had come out.  But unlike this new Mac I got a few months ago, all the parts were easily replaceable.  Of course my parents wouldn't let me touch their computer, so against my siblings' will, I opened ours up and began tinkering around.  I ordered a few extra RAM sticks, a new hard drive, and "borrowed" a friend's copy of Windows 2000.  And luckily, my closest friends were all into computers and technology (and of course video games) the same way I was.  
 
