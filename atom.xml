@@ -4,7 +4,7 @@
   <title><![CDATA[My Octopress Blog]]></title>
   <link href="http://mschmaus201.github.io/atom.xml" rel="self"/>
   <link href="http://mschmaus201.github.io/"/>
-  <updated>2013-06-20T00:02:06-04:00</updated>
+  <updated>2013-06-22T18:00:31-04:00</updated>
   <id>http://mschmaus201.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -20,17 +20,17 @@
     <id>http://mschmaus201.github.io/blog/2013/06/19/hello-world</id>
     <content type="html"><![CDATA[<h2>Hello World</h2>
 
-<p>My name is Matt and this is my first blog post!  I find understanding why people are where they are today is incredibly valuable, so before I begin with the more technical posts, I&rsquo;d just like to introduce myself&hellip;</p>
+<p>My name is Matt and this is my first blog post.  I find understanding why people are where they are today is incredibly valuable, so before I begin with the more technical posts, I&rsquo;d just like to introduce myself&hellip;</p>
 
 <h3>Background</h3>
 
 <h4>My First Computers</h4>
 
-<p>Born in NYC and raised in New Jersey (stop the jokes right now), my first interaction with computers began with the family&rsquo;s Windows 95-powered Gateway 2000.  I absolutely LOVED playing games on that thing &ndash; Skyroads (still play with that one when I&rsquo;m feeling nastalgic), Oregon Trail, Roller Coaster Tycoon, and Myst (I never really figured out what to do in that haha).  It took a few years of just playing on PC&rsquo;s to really appreciate what they can do.  It wasn&rsquo;t until we got two Dell towers for the house (one for the parents and one for the kids) that I really became obsessed.</p>
+<p>Born in NYC and raised in New Jersey, my first interaction with computers began with the family&rsquo;s Windows 95-powered Gateway 2000.  I absolutely LOVED playing games on that thing &ndash; Skyroads (still play with that one when I&rsquo;m feeling nostalgic), Oregon Trail, Roller Coaster Tycoon, and Myst (I never really figured out what to do in that).  It took a few years of just playing on PC&rsquo;s to really appreciate what they can do.  It wasn&rsquo;t until we got two Dell towers for the house (one for the parents and one for the kids) that I really became obsessed.</p>
 
-<p>Within a few months of getting these, newer and faster models had come out.  But unlike this new Mac I got a few months ago (my first one!), all the parts were easily replaceable.  Of course my parents wouldn&rsquo;t let me touch their computer, so against my siblings&#8217; will, I opened ours up and began tinkering around.  I ordered a few extra RAM sticks, a new hard drive, and &ldquo;borrowed&rdquo; a friend&rsquo;s copy of Windows 2000.  And luckily, my closest friends were all into computers and technology (and of course video games) the same way I was.</p>
+<p>Within a few months of getting these, newer and faster models had come out.  But unlike this new Mac I got a few months ago, all the parts were easily replaceable.  Of course my parents wouldn&rsquo;t let me touch their computer, so against my siblings&#8217; will, I opened ours up and began tinkering around.  I ordered a few extra RAM sticks, a new hard drive, and &ldquo;borrowed&rdquo; a friend&rsquo;s copy of Windows 2000.  And luckily, my closest friends were all into computers and technology (and of course video games) the same way I was.</p>
 
-<p>Separate from computers, my dad instilled in me this curiosity and desire to build and fix things. I NEEDED (and still do!) to understand how things actually work. From building outdoor furniture (and refusing to read the instructions), to watching him and my grandfather work on their cars, to watching documentaries on TV on how things were made, I just couldn&rsquo;t imagine myself using something without understanding how it actually worked.  And if something broke, I would sit there for HOURS and get pissed off to no end until I figured out how to fix it.  More than anything else, that mindset applies to technology.</p>
+<p>Separate from computers, my dad instilled in me this curiosity and desire to build and fix things. I needed (and still do) to understand how things actually work. From building outdoor furniture (and refusing to read the instructions), to watching him and my grandfather work on their cars, to watching documentaries on TV on how things were made, I just couldn&rsquo;t imagine myself using something without understanding how it actually worked.  And if something broke, I would sit there for HOURS and get pissed off to no end until I figured out how to fix it.  More than anything else, that mindset applies to technology.</p>
 
 <p>One of my favorites quotes about programming (can&rsquo;t remember where I read it) is &ldquo;developers are nothing if not compulsive problem solvers.&rdquo; By the time high school came around I knew exactly what I wanted to focus on.</p>
 
@@ -44,7 +44,7 @@
 
 <p>For college, I escaped the northeast and attended Washington University in St. Louis where I studied Economics and Entrepreneurship.  I found the former absolutely useless, but the allure of entrepreneurship had its&#8217; hold on me.</p>
 
-<p>At the end of freshman year, two of my roommates and I purchased <a href="http://bearsbikes.com/">Bears&#8217; Bikes</a>, the campus bicycle rental business.  WHAT AN EXPERIENCE!  Everything (ok maybe not everything) I learned in class I was able to apply to the business.  But interestingly enough, most things I learned in the business I was able to apply to class!  From managing customers and our employees, to accounting, to marketing, what I appreciated most was being able to see direct results in the business based on our actions.  And as we grew the company, so did my enthusiasm for the company.</p>
+<p>At the end of freshman year, two of my roommates and I purchased <a href="http://bearsbikes.com/">Bears&#8217; Bikes</a>, the campus bicycle rental business &ndash; what an experience!  For many things I learned in class, I was able to apply to the business.  But interestingly enough, most things I learned in the business I was able to apply to class.  From managing customers and our employees, to accounting, to marketing, what I appreciated most was being able to see direct results in the business based on our actions.  And as we grew the company, so did my enthusiasm for the company.</p>
 
 <p>While working on various parts of the business, I would picture it in my mind as some object that I&rsquo;m taking apart, improving, and putting back together. If you were wondering, we successfully sold Bears&#8217; Bikes towards the end of our senior year. As much as I loved the experience, maintaining a fleet of 150+ bikes definitely turned me off from cycling for a little while.</p>
 
@@ -58,7 +58,7 @@
 
 <p>Lesson learned for me though is the importance of being more self reliant.  I&rsquo;m now revisiting my roots and (re)learn programming.  I know that I will start another business of my own one day, and the way this world is going, computers will no doubt play an integral role.  So why rely on someone else to manage what I can learn myself?  That&rsquo;s why I am a student at Flatiron School today. And less than three weeks in, I can already tell this is one of the best decisions of my life.</p>
 
-<p>My friend/past business partner had explained to me that he wansn&rsquo;t a fan of one of his summer internships because he already knew everything he needed to do well.  At the time I didn&rsquo;t really understand why he said that.  I couldn&rsquo;t imagine the downside to actually being fully qualified for your job!  But it wasn&rsquo;t until studying here did I really understand what he was talking about.</p>
+<p>My friend had explained to me that he wasn&rsquo;t a fan of one of his summer internships because he already knew everything he needed to do well.  At the time I didn&rsquo;t really understand why he said that.  I couldn&rsquo;t imagine the downside to actually being fully qualified for your job!  But it wasn&rsquo;t until studying here did I really understand what he was talking about.</p>
 
 <p>More than ever, I now see how programming fits my need to understand how things work.  Working on econ problem sets in college, I would have no problem passing over a problem after a while if there was no hope in me figuring it out.  But with programming, I&rsquo;ve spent countless hours staying up at night trying to work out issues in a program, not willing to give up.  I feel like a kid again because this reminds me of my younger self, and I couldn&rsquo;t have asked for more.</p>
 
