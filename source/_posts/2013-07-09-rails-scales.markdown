@@ -30,14 +30,29 @@ Turns out that ActiveRecord is the main culprit in scalability issues within Rai
 ###Avoiding N+1  
 
 Luckily, this isn’t something you have to be stuck with.  ActiveRecord uses something called lazy loading, in which it only performs a certain task when necessary.   On the other side of the spectrum is eager, and over-eager loading.  For example (based on a post [here](http://stackoverflow.com/questions/1299374/what-is-eager-loading)):  
-`Imagine a page with rollover images like for menu items or navigation. There are three ways the image loading could work on this page:    ~ Load every single image required before you render the page (eager);    ~ Load only the displayed images on page load and load the others if/when they are required (lazy); and    ~ Load only the displayed images on page load. After the page has loaded preload the other images in the background in case you need them (over-eager).`  
+
+Imagine a page with rollover images like for menu items or navigation. There are three ways the image loading could work on this page:  
+* Load every single image required before you render the page (eager);  
+* Load only the displayed images on page load and load the others if/when they are required (lazy); and  
+* Load only the displayed images on page load. After the page has loaded preload the other images in the background in case you need them (over-eager). 
 
 Using eager loading helps minimize the number of queries.  Ideally, the above example with cars and tires would only come out to two queries, no matter how many cars there were.  Here is how one would use eager loading:  
 
-######N+1 query  
-<% @cars = Car.all(@cars).each do |car| %>  <p><%= car.tire.position %> </p>  <% end %>  
-######Eager loading  
-<% @cars = Car.find(:all, :include=>[:tire] %>  <% @cars.each do |car|%>  <p><%= car.tire.position %></p>  <% end %>  
-As mentioned before, this will generate at most two queries, no matter how many rows you have in the posts table.  
-###Quantifying Issues  
-If data is on a different machine, there is typically 1-2ms delay per query.  So if you take Twitter's one billion queries per day, latency can 
+#####N+1 query  
+
+<% @cars = Car.all(@cars).each do |car| %>  
+<p><%= car.tire.position %> </p>  
+<% end %>  
+
+#####Eager loading  
+<% @cars = Car.find(:all, :include=>[:tire] %>  
+<% @cars.each do |car|%>  
+<p><%= car.tire.position %></p>  
+<% end %>  
+As mentioned before, this will generate at most two queries, no matter how many rows you have in the posts table.  
+###Detecting Performance Problems  
+One of the most powerful plugins is the "query_reviewer" which automatically analyzes SQL code that ActiveRecord generates for potential problems. It rates a page's SQL usage into one of three categories (Ok, Warning, and Critical), attaches warnings to any queries in which one is needed, and displays an interactive summary to help you determine which queries are not absolutely necessary.  
+  
+###Conclusion  
+
+All in all, the scalability issues of Ruby on Rails can be overcome.  The framework allows you to spend less time building and more time planning the architecture and how to scale.  Don't let is scare you off from the elegance of the framework.
