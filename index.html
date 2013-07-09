@@ -158,9 +158,9 @@
 <p>Luckily, this isn’t something you have to be stuck with.  ActiveRecord uses something called lazy loading, in which it only performs a certain task when necessary.   On the other side of the spectrum is eager, and over-eager loading.  For example (based on a post <a href="http://stackoverflow.com/questions/1299374/what-is-eager-loading">here</a>):</p>
 
 <p>Imagine a page with rollover images like for menu items or navigation. There are three ways the image loading could work on this page:<br/>
-* Load every single image required before you render the page (eager);<br/>
-* Load only the displayed images on page load and load the others if/when they are required (lazy); and<br/>
-* Load only the displayed images on page load. After the page has loaded preload the other images in the background in case you need them (over-eager).</p>
+1. Load every single image required before you render the page (eager);<br/>
+2. Load only the displayed images on page load and load the others if/when they are required (lazy); and<br/>
+3. Load only the displayed images on page load. After the page has loaded preload the other images in the background in case you need them (over-eager).</p>
 
 <p>Using eager loading helps minimize the number of queries.  Ideally, the above example with cars and tires would only come out to two queries, no matter how many cars there were.  Here is how one would use eager loading:</p>
 
@@ -181,7 +181,7 @@ As mentioned before, this will generate at most two queries, no matter how many 
 
 <h3>Detecting Performance Problems</h3>
 
-<p>One of the most powerful plugins is the &ldquo;query_reviewer&rdquo; which automatically analyzes SQL code that ActiveRecord generates for potential problems. It rates a page&rsquo;s SQL usage into one of three categories (Ok, Warning, and Critical), attaches warnings to any queries in which one is needed, and displays an interactive summary to help you determine which queries are not absolutely necessary.</p>
+<p>One of the most powerful plugins is the &ldquo;query_reviewer&rdquo; which automatically analyzes SQL code that ActiveRecord generates for potential problems. It rates a page&rsquo;s SQL usage into one of three categories (Ok, Warning, and Critical), attaches warnings to any queries in which one is needed, and displays an interactive summary to help you determine which queries are not absolutely necessary.  Here&rsquo;s a <a href="https://github.com/nesquena/query_reviewer">link</a> to the repo for the gem.</p>
 
 <h3>Conclusion</h3>
 
