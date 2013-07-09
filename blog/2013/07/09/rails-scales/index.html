@@ -132,23 +132,37 @@
 
 <h3>Avoiding N+1</h3>
 
-<p>Luckily, this isn’t something you have to be stuck with.  ActiveRecord uses something called lazy loading, in which it only performs a certain task when necessary.   On the other side of the spectrum is eager, and over-eager loading.  For example (based on a post <a href="http://stackoverflow.com/questions/1299374/what-is-eager-loading">here</a>):<br/>
-<code>Imagine a page with rollover images like for menu items or navigation. There are three ways the image loading could work on this page:    ~ Load every single image required before you render the page (eager);    ~ Load only the displayed images on page load and load the others if/when they are required (lazy); and    ~ Load only the displayed images on page load. After the page has loaded preload the other images in the background in case you need them (over-eager).</code></p>
+<p>Luckily, this isn’t something you have to be stuck with.  ActiveRecord uses something called lazy loading, in which it only performs a certain task when necessary.   On the other side of the spectrum is eager, and over-eager loading.  For example (based on a post <a href="http://stackoverflow.com/questions/1299374/what-is-eager-loading">here</a>):</p>
+
+<p>Imagine a page with rollover images like for menu items or navigation. There are three ways the image loading could work on this page:<br/>
+* Load every single image required before you render the page (eager);<br/>
+* Load only the displayed images on page load and load the others if/when they are required (lazy); and<br/>
+* Load only the displayed images on page load. After the page has loaded preload the other images in the background in case you need them (over-eager).</p>
 
 <p>Using eager loading helps minimize the number of queries.  Ideally, the above example with cars and tires would only come out to two queries, no matter how many cars there were.  Here is how one would use eager loading:</p>
 
 <h5>N+1 query</h5>
 
-<p>&lt;% @cars = Car.all(@cars).each do |car| %>  <p>&lt;%= car.tire.position %> </p>  &lt;% end %></p>
+<p>&lt;% @cars = Car.all(@cars).each do |car| %></p>
+
+<p><p>&lt;%= car.tire.position %> </p><br/>
+&lt;% end %></p>
 
 <h5>Eager loading</h5>
 
-<p>&lt;% @cars = Car.find(:all, :include=>[:tire] %>  &lt;% @cars.each do |car|%>  <p>&lt;%= car.tire.position %></p>  &lt;% end %><br/>
+<p>&lt;% @cars = Car.find(:all, :include=>[:tire] %><br/>
+&lt;% @cars.each do |car|%><br/>
+<p>&lt;%= car.tire.position %></p><br/>
+&lt;% end %><br/>
 As mentioned before, this will generate at most two queries, no matter how many rows you have in the posts table.</p>
 
-<h3>Quantifying Issues</h3>
+<h3>Detecting Performance Problems</h3>
 
-<p>If data is on a different machine, there is typically 1-2ms delay per query.  So if you take Twitter&rsquo;s one billion queries per day, latency can</p>
+<p>One of the most powerful plugins is the &ldquo;query_reviewer&rdquo; which automatically analyzes SQL code that ActiveRecord generates for potential problems. It rates a page&rsquo;s SQL usage into one of three categories (Ok, Warning, and Critical), attaches warnings to any queries in which one is needed, and displays an interactive summary to help you determine which queries are not absolutely necessary.</p>
+
+<h3>Conclusion</h3>
+
+<p>All in all, the scalability issues of Ruby on Rails can be overcome.  The framework allows you to spend less time building and more time planning the architecture and how to scale.  Don&rsquo;t let is scare you off from the elegance of the framework.</p>
 </div>
 
 
