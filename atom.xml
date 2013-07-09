@@ -4,7 +4,7 @@
   <title><![CDATA[My Octopress Blog]]></title>
   <link href="http://mschmaus201.github.io/atom.xml" rel="self"/>
   <link href="http://mschmaus201.github.io/"/>
-  <updated>2013-07-09T01:27:02-04:00</updated>
+  <updated>2013-07-09T01:28:10-04:00</updated>
   <id>http://mschmaus201.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -44,11 +44,11 @@
 
 <p>Using eager loading helps minimize the number of queries.  Ideally, the above example with cars and tires would only come out to two queries, no matter how many cars there were.  Here is how one would use eager loading:</p>
 
-<h6>N+1 query</h6>
+<h5>N+1 query</h5>
 
 <p>&lt;% @cars = Car.all(@cars).each do |car| %>  <p>&lt;%= car.tire.position %> </p>  &lt;% end %></p>
 
-<h6>Eager loading</h6>
+<h5>Eager loading</h5>
 
 <p>&lt;% @cars = Car.find(:all, :include=>[:tire] %>  &lt;% @cars.each do |car|%>  <p>&lt;%= car.tire.position %></p>  &lt;% end %><br/>
 As mentioned before, this will generate at most two queries, no matter how many rows you have in the posts table.</p>
