@@ -99,6 +99,94 @@
 
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/07/09/rails-scales/">Rails Scales</a></h1>
+    
+    
+      <p class="meta">
+        
+  
+
+
+  
+    <span class="byline author vcard">by <span class="fn">Your Name</span></span>
+  
+
+ - 
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-09T00:51:00-04:00" pubdate data-updated="true">Jul 9<span>th</span>, 2013</time> - 
+        
+
+
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Rails Scales</h2>
+
+<p>Although I just began learning about the magic and wonders of Ruby on Rails, I’ve heard for some time that Rails has issues with scalability once you reach a certain point.  But in reality, that’s all I’ve really ever heard – I’ve never been offered any details as to how or why this is the case.</p>
+
+<h3>Popular Sites on Rails</h3>
+
+<p>Before getting into the details, there are a number of very popular sites that are built using Ruby on Rails, including: GitHub, Groupon, Hulu, YellowPages, Basecamp, Shopify, and Airbnb.</p>
+
+<h4>Twitter</h4>
+
+<p>Twitter was launched using Rails back in 2006.  Beginning in 2008, rumors of Twitter dropping Rails surfaced in the news, but this didn’t actually occur until 2011 – switching to Lucene, a “full-featured text search engine library written entirely in Java.”  This transition took place the week after the tsunami hit in Japan, which led to nearly a doubling in the usage of Twitter.  The switch cut latency to a third.  BUT, that doesn’t mean that the scalability issues were related to Rails!</p>
+
+<h3>The Problem with Rails</h3>
+
+<p>So most of the issues that arise with Rails don’t directly have to do with the Rails framework itself, rather the interaction with the database.  For example, Rails encourages programmers to develop in a local environment in which you generally work with smaller data sizes, but once deployed, you may find that working with larger data sizes can introduce significant performance problems.  Additionally, because Rails separates you a good amount from SQL, many Rails developers get into this “SQL is bad” mindset, instead relying on ActiveRecord.  Of course, ActiveRecord makes so many things so easy, but it does have its own performance issues.</p>
+
+<p>Turns out that ActiveRecord is the main culprit in scalability issues within Rails, specifically relating to the N+1 query issues!  Just for review, here’s an example of what the N+1 query issue is:<br/>
+<code>Lets say you have 100 cars, each with four tires.  In order to query each tire position (lets say depending on where the tire is, it has a position number of 1-4) with ActiveRecord, you’d ultimately be querying all 100 cars, and then for each car, you query the tires.  That ultimately comes out to 101 queries – incredibly inefficient!  Ultimately, it is faster to issue one query with 100 results rather than issue 100 queries with one result.</code></p>
+
+<h3>Avoiding N+1</h3>
+
+<p>Luckily, this isn’t something you have to be stuck with.  ActiveRecord uses something called lazy loading, in which it only performs a certain task when necessary.   On the other side of the spectrum is eager, and over-eager loading.  For example (based on a post <a href="http://stackoverflow.com/questions/1299374/what-is-eager-loading">here</a>):<br/>
+<code>Imagine a page with rollover images like for menu items or navigation. There are three ways the image loading could work on this page:    ~ Load every single image required before you render the page (eager);    ~ Load only the displayed images on page load and load the others if/when they are required (lazy); and    ~ Load only the displayed images on page load. After the page has loaded preload the other images in the background in case you need them (over-eager).</code></p>
+
+<p>Using eager loading helps minimize the number of queries.  Ideally, the above example with cars and tires would only come out to two queries, no matter how many cars there were.  Here is how one would use eager loading:</p>
+
+<h6>N+1 query</h6>
+
+<p>&lt;% @cars = Car.all(@cars).each do |car| %>  <p>&lt;%= car.tire.position %> </p>  &lt;% end %></p>
+
+<h6>Eager loading</h6>
+
+<p>&lt;% @cars = Car.find(:all, :include=>[:tire] %>  &lt;% @cars.each do |car|%>  <p>&lt;%= car.tire.position %></p>  &lt;% end %><br/>
+As mentioned before, this will generate at most two queries, no matter how many rows you have in the posts table.</p>
+
+<h3>Quantifying Issues</h3>
+
+<p>If data is on a different machine, there is typically 1-2ms delay per query.  So if you take Twitter&rsquo;s one billion queries per day, latency can</p>
+</div>
+  
+  
+
+
+</div>
+
+      </article>
+    
+    
+      <article class="span4">
+        <div class="article-format">
+
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/06/19/hello-world/">Hello World</a></h1>
     
     
@@ -296,6 +384,10 @@
   <div class="span3">
     <h2>recent posts</h2>
     <ul class="recent_posts">
+      
+        <li>
+          <a href="/blog/2013/07/09/rails-scales/">Rails Scales</a>
+        </li>
       
         <li>
           <a href="/blog/2013/06/19/hello-world/">hello world</a>
