@@ -111,15 +111,18 @@
 <p>PhoneGap is built on open source software called Apache Cordova.  To build something with PhoneGap, you’ll be using the cordova command-line interface.</p>
 
 <p>First step is to install Node.js<br/>
-<img src="../images/node_js_installation.png"></p>
+<img src="/images/node_js_installation.png"></p>
 
-<p>Then, you must install cordova using: <em>sudo npm install -g cordova</em> in the terminal.  &ldquo;npm&rdquo; refers to the packet manager for the Node JavaScript platform, which is installed when you download Node.js.</p>
+<p>Then, you must install cordova using: <em>sudo npm install -g cordova</em> in the terminal.  &ldquo;npm&rdquo; stands for node package manager,  which, if you could guess, is the packet manager for the Node JavaScript platform.  This is installed when you download Node.js.</p>
 
-<p>To create a new project directory, you need to run <em>cordova create DirectoryName</em>.  This will create three subdirectories, including: merges, plugins, and www.  A fourth is pictured below for the target platform you&rsquo;d like to develop for &ndash; ie, iOS, Android, etc.</p>
+<p>To create a new project directory, you need to run <em>cordova create DirectoryName</em>.  This will create three subdirectories, including: <em>merges</em>, <em>plugins</em>, and <em>www</em>.  <br/>
+<img src="/images/cordova_phonegap_directory.png"></p>
 
-<p><img src="../images/cordova_phonegap_directory.png"></p>
+<p><em>platforms</em>, the additional directory pictured above is for the target platform(s) you&rsquo;d like to develop for &ndash; ie, iOS, Android, etc.</p>
 
-<p>For my follow up post, I&rsquo;ll install the iOS SDK and create my first PhoneGap app!</p>
+<p>All subdirectories are empty except for the <em>www</em> directory, of which you can see the content in the image above. The <em>www</em> directory is where the application&rsquo;s home page lives.  And for each platform you create (I&rsquo;ll get into this in Part 2 of the post, but the command to add a platform (iOS for exampke) is <em>cordova platform add ios</em>), another <em>www</em> directory is created within the platform/ios/ directory path.</p>
+
+<p>For my follow up post, I&rsquo;ll install the iOS SDK and create my first PhoneGap app!  Stay tuned.</p>
 </div>
   
   
