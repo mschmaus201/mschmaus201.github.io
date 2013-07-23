@@ -1,0 +1,232 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>PhoneGap: Intro (Part 1) - My Octopress Blog</title>
+  <meta name="author" content="Your Name">
+
+  
+  <meta name="description" content="This is the first of two posts relating to PhoneGap. This post will be my introduction to PhoneGap, and the second post will be a walkthrough of &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://mschmaus201.github.io/blog/2013/07/23/phonegap-intro-part-1">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">My Octopress Blog</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:mschmaus201.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">PhoneGap: Intro (Part 1)</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-23T00:11:00-04:00" pubdate data-updated="true">Jul 23<span>rd</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>This is the first of two posts relating to PhoneGap.  This post will be my introduction to PhoneGap, and the second post will be a walkthrough of building my first PhoneGap-based app.</p>
+
+<h3>What is PhoneGap?</h3>
+
+<p>PhoneGap is an open source framework used to allow you to easily build cross-platform mobile apps using HTML, CSS, and JavaScript.  More so, it allows you to natively interact with the phone, meaning it gives you access to a phone’s features including the accelerometer, GPS, compass, notification center, etc.  Without PhoneGap, a developer would most likely use Java and Objective-C to develop natively for Android and iOS, respectively.</p>
+
+<h3>History</h3>
+
+<p>To start off, its fascinating to go back into PhoneGap’s archives and read their blogs from back in the day when they first announced and released information on their framework!  I definitely recommend taking a look <a href="http://phonegap.com/blog/">here</a>.</p>
+
+<p>PhoneGap was first announced in 2008 for the purpose of allowing native mobile app features available to mobile web apps, taking the logic of Adobe AIR, which allows web developers to build Windows and OSX applications.</p>
+
+<h3>Set Up</h3>
+
+<p>PhoneGap is built on open source software called Apache Cordova.  To build something with PhoneGap, you’ll be using the cordova command-line interface.</p>
+
+<p>First step is to install Node.js<br/>
+<img src="../images/node_js_installation.png"></p>
+
+<p>Then, you must install cordova using: <em>sudo npm install -g cordova</em> in the terminal.  &ldquo;npm&rdquo; refers to the packet manager for the Node JavaScript platform, which is installed when you download Node.js.</p>
+
+<p>To create a new project directory, you need to run <em>cordova create DirectoryName</em>.  This will create three subdirectories, including: merges, plugins, and www.  A fourth is pictured below for the target platform you&rsquo;d like to develop for &ndash; ie, iOS, Android, etc.</p>
+
+<p><img src="../images/cordova_phonegap_directory.png"></p>
+
+<p>For my follow up post, I&rsquo;ll install the iOS SDK and create my first PhoneGap app!</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Your Name</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-23T00:11:00-04:00" pubdate data-updated="true">Jul 23<span>rd</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://mschmaus201.github.io/blog/2013/07/23/phonegap-intro-part-1/" data-via="" data-counturl="http://mschmaus201.github.io/blog/2013/07/23/phonegap-intro-part-1/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/07/09/rails-scales/" title="Previous Post: Rails Scales">&laquo; Rails Scales</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/07/23/phonegap-intro-part-1/">PhoneGap: Intro (Part 1)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/09/rails-scales/">Rails Scales</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/19/hello-world/">Hello World</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/17/arduino-the-ruby-way/">Arduino the Ruby Way</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Your Name -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

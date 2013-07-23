@@ -4,7 +4,7 @@
   <title><![CDATA[My Octopress Blog]]></title>
   <link href="http://mschmaus201.github.io/atom.xml" rel="self"/>
   <link href="http://mschmaus201.github.io/"/>
-  <updated>2013-07-22T21:56:08-04:00</updated>
+  <updated>2013-07-23T00:31:05-04:00</updated>
   <id>http://mschmaus201.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -12,6 +12,40 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[PhoneGap: Intro (Part 1)]]></title>
+    <link href="http://mschmaus201.github.io/blog/2013/07/23/phonegap-intro-part-1/"/>
+    <updated>2013-07-23T00:11:00-04:00</updated>
+    <id>http://mschmaus201.github.io/blog/2013/07/23/phonegap-intro-part-1</id>
+    <content type="html"><![CDATA[<p>This is the first of two posts relating to PhoneGap.  This post will be my introduction to PhoneGap, and the second post will be a walkthrough of building my first PhoneGap-based app.</p>
+
+<h3>What is PhoneGap?</h3>
+
+<p>PhoneGap is an open source framework used to allow you to easily build cross-platform mobile apps using HTML, CSS, and JavaScript.  More so, it allows you to natively interact with the phone, meaning it gives you access to a phone’s features including the accelerometer, GPS, compass, notification center, etc.  Without PhoneGap, a developer would most likely use Java and Objective-C to develop natively for Android and iOS, respectively.</p>
+
+<h3>History</h3>
+
+<p>To start off, its fascinating to go back into PhoneGap’s archives and read their blogs from back in the day when they first announced and released information on their framework!  I definitely recommend taking a look <a href="http://phonegap.com/blog/">here</a>.</p>
+
+<p>PhoneGap was first announced in 2008 for the purpose of allowing native mobile app features available to mobile web apps, taking the logic of Adobe AIR, which allows web developers to build Windows and OSX applications.</p>
+
+<h3>Set Up</h3>
+
+<p>PhoneGap is built on open source software called Apache Cordova.  To build something with PhoneGap, you’ll be using the cordova command-line interface.</p>
+
+<p>First step is to install Node.js<br/>
+<img src="../images/node_js_installation.png"></p>
+
+<p>Then, you must install cordova using: <em>sudo npm install -g cordova</em> in the terminal.  &ldquo;npm&rdquo; refers to the packet manager for the Node JavaScript platform, which is installed when you download Node.js.</p>
+
+<p>To create a new project directory, you need to run <em>cordova create DirectoryName</em>.  This will create three subdirectories, including: merges, plugins, and www.  A fourth is pictured below for the target platform you&rsquo;d like to develop for &ndash; ie, iOS, Android, etc.</p>
+
+<p><img src="../images/cordova_phonegap_directory.png"></p>
+
+<p>For my follow up post, I&rsquo;ll install the iOS SDK and create my first PhoneGap app!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Rails Scales]]></title>
