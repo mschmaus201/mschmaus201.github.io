@@ -4,7 +4,7 @@
   <title><![CDATA[Matt's Blog!]]></title>
   <link href="http://mschmaus201.github.io/atom.xml" rel="self"/>
   <link href="http://mschmaus201.github.io/"/>
-  <updated>2013-08-09T23:19:39-04:00</updated>
+  <updated>2013-08-09T23:20:47-04:00</updated>
   <id>http://mschmaus201.github.io/</id>
   <author>
     <name><![CDATA[Matt  Schmaus]]></name>
@@ -33,7 +33,7 @@ ActionMailer::Base.smtp_settings = {
     :port                 =&gt; 587,
     :domain               =&gt; "gmail.com",
     :user_name            =&gt; "gitgallery",
-    :password             =&gt; "ggpassword",
+    :password             =&gt; "you_wish",
     :authentication       =&gt; "plain",
     :enable_starttls_auto =&gt; true
 } 
