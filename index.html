@@ -95,16 +95,29 @@
 
 
   <div class="entry-content"><p>To begin setting up ActionMailer, first step is to run <em>rails g mailer gg_mailer</em> (I’m using &lsquo;gg_mailer&rsquo; as the name for my mailer class in this walk-through) in the terminal, and then bundle install.  This will create a two files for you:<br/>
-1. setup_mail.rb in config/initializers directory<br/>
-2. gg_mailer.rb in app/mailers directory</p>
+&nbsp;&nbsp;&nbsp;&nbsp;1. <em>setup_mail.rb</em> in config/initializers directory<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;2. <em>gg_mailer.rb</em> in app/mailers directory</p>
 
-<h2>setup_mail.rb</h2>
+<h2><em>setup_mail.rb</em></h2>
 
-<p>The first file to begin working with is the <em>setup_mail.rb</em> file where you will connect your email account to your rails app.  For this example I’ll be using Gmail.  The first step to set up this file is to establish the delivery method, SMTP, or simple mail transfer protocol.  SMTP is a protocol for sending emails between servers, and a large majority or mail servers use this protocol.  Next is to set up the SMTP settings.  First are the address, port, and domain for the mail server; for Gmail you can use smtp.gmail.com, port 587, and gmail.com, respectively.  Then you include your username and password.  Next, you must establish what type of authentication is required – plain, login, or cram_md5.  You can use plain for Gmail.  Using login will encode your password using Base64, and I don’t fully understand the mechanism of cram_md5, but according to the <a href="http://api.rubyonrails.org/classes/ActionMailer/Base.html">ActionMailer documentation</a>, it “combines a Challenge/Response mechanism to exchange information and a cryptographic Message Digest 5 algorithm to hash important information.”  Finally, you have to set the enable_starttls_auto value, which accepts a boolean value; for Gmail set it to true.  This detects if your mail server uses STARTTLS (only available if your server uses SMTP), which encrypts the connection to an SSL or TSL connection rather than just a plain text connection.<br/>
-This is what it should look like by the time you’re done with this step.<br/>
-<img src="/images/setup_mail.png"></p>
+<p>The first file to begin working with is the <em>setup_mail.rb</em> file where you will connect your email account to your rails app.  I&rsquo;ll be using GMail for this example.  The first step to set up this file is to establish the delivery method, SMTP, or simple mail transfer protocol.  SMTP is a protocol for sending emails between servers, and a large majority or mail servers use this protocol.  Next is to set up the SMTP settings.  First are the address, port, and domain for the mail server; for GMail you can use smtp.gmail.com, port 587, and gmail.com, respectively.  Then you include your username and password.  Next, you must establish what type of authentication is required – plain, login, or cram_md5.  You can use plain for GMail.  Using login will encode your password using Base64, and I don’t fully understand the mechanism of cram_md5, but according to the <a href="http://api.rubyonrails.org/classes/ActionMailer/Base.html">ActionMailer documentation</a>, it “combines a Challenge/Response mechanism to exchange information and a cryptographic Message Digest 5 algorithm to hash important information.”  Finally, you have to set the enable_starttls_auto value, which accepts a boolean value; for GMail set it to true.  This detects if your mail server uses STARTTLS (only available if your server uses SMTP), which encrypts the connection to an SSL or TSL connection rather than just a plain text connection.<br/>
+This is what it should look like by the time you’re done with this step.</p>
 
-<h2>gg_mailer.rb</h2>
+<pre><code>ActionMailer::Base.delivery_method = :smtp
+ActionMailer::Base.smtp_settings = {
+    :address              =&gt; "smtp.gmail.com",
+    :port                 =&gt; 587,
+    :domain               =&gt; "gmail.com",
+    :user_name            =&gt; "gitgallery",
+    :password             =&gt; "ggpassword",
+    :authentication       =&gt; "plain",
+    :enable_starttls_auto =&gt; true
+} 
+</code></pre>
+
+<p>Just make sure to include this file in <em>.gitignore</em>!  Otherwise you&rsquo;ll be exposing your password to the world&hellip;</p>
+
+<h2><em>gg_mailer.rb</em></h2>
 
 <p>Next file you have to work with is <em>gg_mailer.rb</em> in the app/mailers directory.  Here, you can set your default address for emails to be sent to, and define a method for each type of email you’d like to be sent.  Below you’ll see a method which sends off a registration confirmation email when called.  The reason for passing user in as an argument and assigning it to the local variable @user is to allow it to be in scope when you create the email in the views/gg_mailer directory.  In here you can include an attachment with the following syntax:</p>
 
@@ -119,15 +132,52 @@ This is what it should look like by the time you’re done with this step.<br/>
 <p>Below is a screenshot of what this file may look like.<br/>
 <img src="/images/gg_mailer.png"></p>
 
+<pre><code>class GgMailer &lt; ActionMailer::Base
+    default from: "gitgallery@gmail.com"
+
+    def registration_confirmation(user)
+        @user = user
+        # attachments["rails.png"] = File.read("#{Rails.root}/public/images/rails.png") #USE THIS IF YOU WANT TO INCLUDE ATTACHMENT
+        mail(:to =&gt; @user.email, :subject =&gt; "Registration Confirmation")
+    end
+
+    def new_project(project, contributor)
+        @project = project
+        @contributor = contributor
+
+        mail(:to =&gt; @contributor["email"], :subject =&gt; "A repo you contributed to was just made into a project on Git Gallery.")
+    end
+end
+</code></pre>
+
 <p>The final step to get ActionMailer working is simply to call the method you just wrote wherever you’d like in your program!  For the example I gave, I’m calling it in the user#update controller/action for various reasons, but essentially this method will only trigger when a user signs in for the first time and confirms their account info!</p>
 
 <h2>development_mail_interceptor</h2>
 
 <p>One additional step you can take is to include the development_mail_interceptor, using the gem “mail”.  The mail interceptor allows you to ensure that all outgoing emails from the designated account direct to an assigned email address, usually the same one that the messages are being sent from.  This is so that whenever you’re in development, testing your site/seeding your database/etc, you are not constantly sending emails to addresses that may be included in your testing environment.<br/>
 So, for the mail interceptor, you want to create the file development_mail_interceptor.rb in the lib director.  In it, you want to have a class of DevelopmentMailInterceptor, and the class method of delivering_email(message).  You can set the email subject and to address by declaring message.subject and message.to, respectively.  For the subject, it is recommended to include in there the email address in which the message is supposed to be sent to, and the message.to address should be sent to where you are sending from.<br/>
-The final step for the mail interceptor is to require it in the setup_mail.rb file, and to call</p>
+The final step for the mail interceptor is to require it in the <em>setup_mail.rb</em> file, and to call</p>
 
 <pre><code>ActionMailer::Base.register_interceptor(DevelopmentMailInterceptor) if Rails.env.development?  
+</code></pre>
+
+<p>This is what the file should look like by the time you&rsquo;re done including the interceptor:</p>
+
+<pre><code>require 'development_mail_interceptor'
+
+ActionMailer::Base.delivery_method = :smtp
+ActionMailer::Base.smtp_settings = {
+    :address              =&gt; "smtp.gmail.com",
+    :port                 =&gt; 587,
+    :domain               =&gt; "gmail.com",
+    :user_name            =&gt; "gitgallery",
+    :password             =&gt; "ggpassword",
+    :authentication       =&gt; "plain",
+    :enable_starttls_auto =&gt; true
+}
+
+# ActionMailer::Base.default_url_options[:host] = "localhost:3000"  #Moved to config/application.rb
+ActionMailer::Base.register_interceptor(DevelopmentMailInterceptor) if Rails.env.development?
 </code></pre>
 
 <h2>View Files</h2>
@@ -235,11 +285,9 @@ Best of luck setting up ActionMailer in your own Rails app! Resources I found in
   </header>
 
 
-  <div class="entry-content"><h2>Rails Scales</h2>
+  <div class="entry-content"><p>Although I just began learning about the magic and wonders of Ruby on Rails, I’ve heard for some time that Rails has issues with scalability once you reach a certain point.  But in reality, that’s all I’ve really ever heard – I’ve never been offered any details as to how or why this is the case.</p>
 
-<p>Although I just began learning about the magic and wonders of Ruby on Rails, I’ve heard for some time that Rails has issues with scalability once you reach a certain point.  But in reality, that’s all I’ve really ever heard – I’ve never been offered any details as to how or why this is the case.</p>
-
-<h3>Popular Sites on Rails</h3>
+<h2>Popular Sites on Rails</h2>
 
 <p>Before getting into the details, there are a number of very popular sites that are built using Ruby on Rails, including: GitHub, Groupon, Hulu, YellowPages, Basecamp, Shopify, and Airbnb.</p>
 
@@ -247,44 +295,46 @@ Best of luck setting up ActionMailer in your own Rails app! Resources I found in
 
 <p>Twitter was launched using Rails back in 2006.  Beginning in 2008, rumors of Twitter dropping Rails surfaced in the news, but this didn’t actually occur until 2011 – switching to Lucene, a “full-featured text search engine library written entirely in Java.”  This transition took place the week after the tsunami hit in Japan, which led to nearly a doubling in the usage of Twitter.  The switch cut latency to a third.  BUT, that doesn’t mean that the scalability issues were related to Rails!</p>
 
-<h3>The Problem with Rails</h3>
+<h2>The Problem with Rails</h2>
 
 <p>So most of the issues that arise with Rails don’t directly have to do with the Rails framework itself, rather the interaction with the database.  For example, Rails encourages programmers to develop in a local environment in which you generally work with smaller data sizes, but once deployed, you may find that working with larger data sizes can introduce significant performance problems.  Additionally, because Rails separates you a good amount from SQL, many Rails developers get into this “SQL is bad” mindset, instead relying on ActiveRecord.  Of course, ActiveRecord makes so many things so easy, but it does have its own performance issues.</p>
 
 <p>Turns out that ActiveRecord is the main culprit in scalability issues within Rails, specifically relating to the N+1 query issues!  Just for review, here’s an example of what the N+1 query issue is:<br/>
 <code>Lets say you have 100 cars, each with four tires.  In order to query each tire position (lets say depending on where the tire is, it has a position number of 1-4) with ActiveRecord, you’d ultimately be querying all 100 cars, and then for each car, you query the tires.  That ultimately comes out to 101 queries – incredibly inefficient!  Ultimately, it is faster to issue one query with 100 results rather than issue 100 queries with one result.</code></p>
 
-<h3>Avoiding N+1</h3>
+<h2>Avoiding N+1</h2>
 
 <p>Luckily, this isn’t something you have to be stuck with.  ActiveRecord uses something called lazy loading, in which it only performs a certain task when necessary.   On the other side of the spectrum is eager, and over-eager loading.  For example (based on a post <a href="http://stackoverflow.com/questions/1299374/what-is-eager-loading">here</a>):</p>
 
 <p>Imagine a page with rollover images like for menu items or navigation. There are three ways the image loading could work on this page:<br/>
-1. Load every single image required before you render the page (eager);<br/>
-2. Load only the displayed images on page load and load the others if/when they are required (lazy); and<br/>
-3. Load only the displayed images on page load. After the page has loaded preload the other images in the background in case you need them (over-eager).</p>
+&nbsp;&nbsp;&nbsp;&nbsp;1. Eager &ndash; load every single image required before you render the page<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;2. Lazy &ndash; load only the displayed images on page load and load the others if/when they are required<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;3. Over-eager &ndash; load only the displayed images on page load. After the page has loaded preload the other images in the background in case you need them</p>
 
 <p>Using eager loading helps minimize the number of queries.  Ideally, the above example with cars and tires would only come out to two queries, no matter how many cars there were.  Here is how one would use eager loading:</p>
 
-<h5>N+1 query</h5>
+<h3>N+1 query</h3>
 
-<p>&lt;% @cars = Car.all(@cars).each do |car| %></p>
+<pre><code>&lt;% @cars = Car.all(@cars).each do |car| %&gt;
+    &lt;p&gt;&lt;%= car.tire.position %&gt; &lt;/p&gt;
+&lt;% end %&gt;  
+</code></pre>
 
-<p><p>&lt;%= car.tire.position %> </p><br/>
-&lt;% end %></p>
+<h3>Eager loading</h3>
 
-<h5>Eager loading</h5>
+<pre><code>&lt;% @cars = Car.find(:all, :include=&gt;[:tire] %&gt;
+&lt;% @cars.each do |car|%&gt;
+    &lt;p&gt;&lt;%= car.tire.position %&gt;&lt;/p&gt;
+&lt;% end %&gt;  
+</code></pre>
 
-<p>&lt;% @cars = Car.find(:all, :include=>[:tire] %><br/>
-&lt;% @cars.each do |car|%><br/>
-<p>&lt;%= car.tire.position %></p><br/>
-&lt;% end %><br/>
-As mentioned before, this will generate at most two queries, no matter how many rows you have in the posts table.</p>
+<p>As mentioned before, this will generate at most two queries, no matter how many rows you have in the posts table.</p>
 
-<h3>Detecting Performance Problems</h3>
+<h2>Detecting Performance Problems</h2>
 
-<p>One of the most powerful plugins is the &ldquo;query_reviewer&rdquo; which automatically analyzes SQL code that ActiveRecord generates for potential problems. It rates a page&rsquo;s SQL usage into one of three categories (Ok, Warning, and Critical), attaches warnings to any queries in which one is needed, and displays an interactive summary to help you determine which queries are not absolutely necessary.  Here&rsquo;s a <a href="https://github.com/nesquena/query_reviewer">link</a> to the repo for the gem.</p>
+<p>One of the most powerful plugins is the &ldquo;query_reviewer&rdquo; which automatically analyzes SQL code that ActiveRecord generates for potential problems. It rates a page&rsquo;s SQL usage into one of three categories &ndash; Ok, Warning, and Critical &ndash; attaches warnings to any queries in which one is needed, and displays an interactive summary to help you determine which queries are not absolutely necessary.  Here&rsquo;s a <a href="https://github.com/nesquena/query_reviewer">link</a> to the repo for the gem.</p>
 
-<h3>Conclusion</h3>
+<h2>Conclusion</h2>
 
 <p>All in all, the scalability issues of Ruby on Rails can be overcome.  The framework allows you to spend less time building and more time planning the architecture and how to scale.  Don&rsquo;t let is scare you off from the elegance of the framework.</p>
 </div>
