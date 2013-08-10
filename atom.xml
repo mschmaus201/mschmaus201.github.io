@@ -4,7 +4,7 @@
   <title><![CDATA[My Octopress Blog]]></title>
   <link href="http://mschmaus201.github.io/atom.xml" rel="self"/>
   <link href="http://mschmaus201.github.io/"/>
-  <updated>2013-08-07T00:10:52-04:00</updated>
+  <updated>2013-08-09T22:18:38-04:00</updated>
   <id>http://mschmaus201.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -14,21 +14,11 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Lets Set Up Actionmailer]]></title>
+    <title type="html"><![CDATA[Lets Set Up ActionMailer]]></title>
     <link href="http://mschmaus201.github.io/blog/2013/08/06/lets-set-up-actionmailer/"/>
-    <updated>2013-08-06T00:00:00-04:00</updated>
+    <updated>2013-08-06T23:37:00-04:00</updated>
     <id>http://mschmaus201.github.io/blog/2013/08/06/lets-set-up-actionmailer</id>
-    <content type="html"><![CDATA[<hr />
-
-<p>layout: post
-title: &ldquo;Lets Set Up ActionMailer&rdquo;
-date: 2013-08-06 23:37
-comments: true
-categories:</p>
-
-<hr />
-
-<p>To begin setting up ActionMailer, first step is to run <em>rails g mailer gg_mailer</em> (I’m using &lsquo;gg_mailer&rsquo; as the name for my mailer class in this walk-through) in the terminal, and then bundle install.  This will create a two files for you:<br/>
+    <content type="html"><![CDATA[<p>To begin setting up ActionMailer, first step is to run <em>rails g mailer gg_mailer</em> (I’m using &lsquo;gg_mailer&rsquo; as the name for my mailer class in this walk-through) in the terminal, and then bundle install.  This will create a two files for you:<br/>
 1. setup_mail.rb in config/initializers directory<br/>
 2. gg_mailer.rb in app/mailers directory</p>
 
@@ -45,8 +35,12 @@ This is what it should look like by the time you’re done with this step.<br/>
 <pre><code>attachments["rails.png"] = File.read("#{Rails.root}/public/images/rails.png")  
 </code></pre>
 
-<p>Finally, the last line is what actually sends off the email (make sure it’s the last line of code!): mail(:to => @user.email, :subject => &ldquo;Registration Confirmation&rdquo;).<br/>
-Below is a screenshot of what this file may look like.<br/>
+<p>Finally, the last line is what actually sends off the email (make sure it’s the last line of code!):</p>
+
+<pre><code>mail(:to =&gt; @user.email, :subject =&gt; "Registration Confirmation")  
+</code></pre>
+
+<p>Below is a screenshot of what this file may look like.<br/>
 <img src="http://mschmaus201.github.io/images/gg_mailer.png"></p>
 
 <p>The final step to get ActionMailer working is simply to call the method you just wrote wherever you’d like in your program!  For the example I gave, I’m calling it in the user#update controller/action for various reasons, but essentially this method will only trigger when a user signs in for the first time and confirms their account info!</p>
@@ -57,12 +51,15 @@ Below is a screenshot of what this file may look like.<br/>
 So, for the mail interceptor, you want to create the file development_mail_interceptor.rb in the lib director.  In it, you want to have a class of DevelopmentMailInterceptor, and the class method of delivering_email(message).  You can set the email subject and to address by declaring message.subject and message.to, respectively.  For the subject, it is recommended to include in there the email address in which the message is supposed to be sent to, and the message.to address should be sent to where you are sending from.<br/>
 The final step for the mail interceptor is to require it in the setup_mail.rb file, and to call</p>
 
-<pre><code>ActionMailer::Base.register_interceptor(DevelopmentMailInterceptor) if Rails.env.development?##View Files  
+<pre><code>ActionMailer::Base.register_interceptor(DevelopmentMailInterceptor) if Rails.env.development?  
 </code></pre>
 
+<h2>View Files</h2>
+
 <p>Last but not least is to actually create the view file for the email itself.  These files should be saved in the views/gg_mailer directory, with the same name as the method that is being called.  For example, the email file for a registration confirmation email (the method triggered for this is registration_confirmation) will be  registration_confirmation.html.erb.  You should also create a text file for those users who prefer text emails over html emails.<br/>
-Best of luck setting up ActionMailer in your own Rails app! Resources I found incredibly helpful were the railscast as well as the documentation.<br/>
-Until next time!</p>
+Best of luck setting up ActionMailer in your own Rails app! Resources I found incredibly helpful were the railscast as well as the documentation.</p>
+
+<p>  Until next time!</p>
 ]]></content>
   </entry>
   
