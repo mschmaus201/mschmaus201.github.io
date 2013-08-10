@@ -119,7 +119,7 @@ ActionMailer::Base.smtp_settings = {
 
 <h2><em>gg_mailer.rb</em></h2>
 
-<p>Next file you have to work with is <em>gg_mailer.rb</em> in the app/mailers directory.  Here, you can set your default address for emails to be sent to, and define a method for each type of email you’d like to be sent.  Below you’ll see a method which sends off a registration confirmation email when called.  The reason for passing user in as an argument and assigning it to the local variable @user is to allow it to be in scope when you create the email in the views/gg_mailer directory.  In here you can include an attachment with the following syntax:</p>
+<p>Next file you have to work with is <em>gg_mailer.rb</em> in the app/mailers directory.  Here, you can set your default address for emails to be sent to, and define a method for each type of email you’d like to be sent.  Below you’ll see a method which sends off a registration confirmation email when called.  The reason for passing user in as an argument and assigning it to the local variable <em>@user</em> is to allow it to be in scope when you create the email in the views/gg_mailer directory.  In here you can include an attachment with the following syntax:</p>
 
 <pre><code>attachments["rails.png"] = File.read("#{Rails.root}/public/images/rails.png")  
 </code></pre>
@@ -129,8 +129,7 @@ ActionMailer::Base.smtp_settings = {
 <pre><code>mail(:to =&gt; @user.email, :subject =&gt; "Registration Confirmation")  
 </code></pre>
 
-<p>Below is a screenshot of what this file may look like.<br/>
-<img src="/images/gg_mailer.png"></p>
+<p>Here is an example of what the file should look like.</p>
 
 <pre><code>class GgMailer &lt; ActionMailer::Base
     default from: "gitgallery@gmail.com"
@@ -144,7 +143,6 @@ ActionMailer::Base.smtp_settings = {
     def new_project(project, contributor)
         @project = project
         @contributor = contributor
-
         mail(:to =&gt; @contributor["email"], :subject =&gt; "A repo you contributed to was just made into a project on Git Gallery.")
     end
 end
@@ -154,9 +152,11 @@ end
 
 <h2>development_mail_interceptor</h2>
 
-<p>One additional step you can take is to include the development_mail_interceptor, using the gem “mail”.  The mail interceptor allows you to ensure that all outgoing emails from the designated account direct to an assigned email address, usually the same one that the messages are being sent from.  This is so that whenever you’re in development, testing your site/seeding your database/etc, you are not constantly sending emails to addresses that may be included in your testing environment.<br/>
-So, for the mail interceptor, you want to create the file development_mail_interceptor.rb in the lib director.  In it, you want to have a class of DevelopmentMailInterceptor, and the class method of delivering_email(message).  You can set the email subject and to address by declaring message.subject and message.to, respectively.  For the subject, it is recommended to include in there the email address in which the message is supposed to be sent to, and the message.to address should be sent to where you are sending from.<br/>
-The final step for the mail interceptor is to require it in the <em>setup_mail.rb</em> file, and to call</p>
+<p>One additional step you can take is to include the development_mail_interceptor, using the gem “mail”.  The mail interceptor allows you to ensure that all outgoing emails from the designated account direct to an assigned email address, usually the same one that the messages are being sent from.  This is so that whenever you’re in development, testing your site/seeding your database/etc, you are not constantly sending emails to addresses that may be included in your testing environment.</p>
+
+<p>So, for the mail interceptor, you want to create the file development_mail_interceptor.rb in the lib director.  In it, you want to have a class of <em>DevelopmentMailInterceptor</em>, and the class method of <em>delivering_email(message)</em>.  You can set the email subject and to address by declaring <em>message.subject</em> and <em>message.to</em>, respectively.  For the subject, it is recommended to include in there the email address in which the message is supposed to be sent to, and the message.to address should be sent to where you are sending from.</p>
+
+<p>The final step for the mail interceptor is to require it in the <em>setup_mail.rb</em> file, and to call</p>
 
 <pre><code>ActionMailer::Base.register_interceptor(DevelopmentMailInterceptor) if Rails.env.development?  
 </code></pre>
@@ -176,7 +176,6 @@ ActionMailer::Base.smtp_settings = {
     :enable_starttls_auto =&gt; true
 }
 
-# ActionMailer::Base.default_url_options[:host] = "localhost:3000"  #Moved to config/application.rb
 ActionMailer::Base.register_interceptor(DevelopmentMailInterceptor) if Rails.env.development?
 </code></pre>
 
@@ -299,8 +298,9 @@ Best of luck setting up ActionMailer in your own Rails app! Resources I found in
 
 <p>So most of the issues that arise with Rails don’t directly have to do with the Rails framework itself, rather the interaction with the database.  For example, Rails encourages programmers to develop in a local environment in which you generally work with smaller data sizes, but once deployed, you may find that working with larger data sizes can introduce significant performance problems.  Additionally, because Rails separates you a good amount from SQL, many Rails developers get into this “SQL is bad” mindset, instead relying on ActiveRecord.  Of course, ActiveRecord makes so many things so easy, but it does have its own performance issues.</p>
 
-<p>Turns out that ActiveRecord is the main culprit in scalability issues within Rails, specifically relating to the N+1 query issues!  Just for review, here’s an example of what the N+1 query issue is:<br/>
-<code>Lets say you have 100 cars, each with four tires.  In order to query each tire position (lets say depending on where the tire is, it has a position number of 1-4) with ActiveRecord, you’d ultimately be querying all 100 cars, and then for each car, you query the tires.  That ultimately comes out to 101 queries – incredibly inefficient!  Ultimately, it is faster to issue one query with 100 results rather than issue 100 queries with one result.</code></p>
+<p>Turns out that ActiveRecord is the main culprit in scalability issues within Rails, specifically relating to the N+1 query issues!  Just for review, here’s an example of what the N+1 query issue is:</p>
+
+<p>  Lets say you have 100 cars, each with four tires.  In order to query each tire position (lets say depending on where the tire is, it has a position number of 1-4) with ActiveRecord, you’d ultimately be querying all 100 cars, and then for each car, you query the tires.  That ultimately comes out to 101 queries – incredibly inefficient!  Ultimately, it is faster to issue one query with 100 results rather than issue 100 queries with one result.</p>
 
 <h2>Avoiding N+1</h2>
 
