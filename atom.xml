@@ -4,7 +4,7 @@
   <title><![CDATA[Matt's Blog]]></title>
   <link href="http://mschmaus201.github.io/atom.xml" rel="self"/>
   <link href="http://mschmaus201.github.io/"/>
-  <updated>2013-08-22T09:49:18-04:00</updated>
+  <updated>2013-08-22T09:50:41-04:00</updated>
   <id>http://mschmaus201.github.io/</id>
   <author>
     <name><![CDATA[Matt  Schmaus]]></name>
@@ -50,8 +50,7 @@
 end  
 </code></pre>
 
-<p>where <em>ShippingHash</em> is the class and <em>@data</em> is the instance variable (a hash) initialized upon creation of a new <em>ShippingHash</em> object.<br/>
-Below is the final code for the parsing program:</p>
+<p>where <em>ShippingHash</em> is the class and <em>@data</em> is the instance variable (a hash) initialized upon creation of a new <em>ShippingHash</em> object. Below is the final code for the parsing program:</p>
 
 <pre><code>require 'yaml'  
 
