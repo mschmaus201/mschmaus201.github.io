@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Matt's Blog!</title>
+  <title>Matt's Blog</title>
   <meta name="author" content="Matt  Schmaus">
 
   
-  <meta name="description" content="To begin setting up ActionMailer, first step is to run rails g mailer gg_mailer (I’m using &lsquo;gg_mailer&rsquo; as the name for my mailer class in &hellip;">
+  <meta name="description" content="This final week at the Flatiron School we had someone come so we can partake in mock interviews. What an experience. This was the first time I had &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +21,7 @@
   <link rel="canonical" href="http://mschmaus201.github.io">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="Matt's Blog!" type="application/atom+xml">
+  <link href="/atom.xml" rel="alternate" title="Matt's Blog" type="application/atom+xml">
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
@@ -36,7 +36,7 @@
 
 <body   >
   <header role="banner"><hgroup>
-  <h1><a href="/">Matt's Blog!</a></h1>
+  <h1><a href="/">Matt's Blog</a></h1>
   
     <h2>A blogging framework for hackers.</h2>
   
@@ -65,6 +65,100 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/08/22/method-missing/">Method_missing: Do You Know Where Your Methods Are?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-22T09:29:00-04:00" pubdate data-updated="true">Aug 22<span>nd</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This final week at the Flatiron School we had someone come so we can partake in mock interviews.  What an experience.   This was the first time I had gone through a technical interview, but I learned a lot more coming out of it than I thought I would!  Best lesson was learning about <em>method_missing</em> in Ruby.</p>
+
+<h3>NoMethodError</h3>
+
+<p>Naturally, when you call an undefined method on a object, we’re all used to receiving this error:</p>
+
+<pre><code>NoMethodError: undefined method “#{method_name}” for "#{receiving_object_name}":“#{receiving_object_class}”  
+</code></pre>
+
+<p>But what exactly happens between the method being called and this error being raised?  If the current class does not contain the instance method being called, it checks if its parent class does.  If that class does not, it moves on up to that class’ parent class, all the way up until it reaches the outermost class: <em>BasicObject</em>.  <em>BasicObject</em> is the parent class for all classes in Ruby.  For more info on <em>BasicObject</em>, check out the Ruby docs <a href="http://www.ruby-doc.org/core-2.0/BasicObject.html">here</a>.  If that class does not contain the instance method called (which it most likely won’t because, by default, it’s a blank class), it will check the Kernel module.   If nothing comes up in the Kernel module, it will call <em>method_missing</em>.  By default, this is what raises <em>NoMethodError</em>, but of course Ruby graciously provides you the ability to override <em>method_missing</em>!</p>
+
+<h3><em>method_missing</em></h3>
+
+<p>In a way, <em>method_missing</em> is a safety net.  It provides you with a way to gracefully handle calling a method that doesn’t exist!</p>
+
+<p>The prompt for my mock interview can be found <a href="https://gist.github.com/wengzilla/e83f221f64077b635047">here</a>.  I was asked to import a YAML file, and make the following string of methods on data return the relevant value in the YAML file:</p>
+
+<pre><code>parse_object.product.first.sku  
+</code></pre>
+
+<p>This string of methods should be the equivalent of calling:</p>
+
+<pre><code>parse_object[“product”].first[“sku”]  
+</code></pre>
+
+<p>This is where method missing kicks in! Rather than having to define a method for every possible key in the parse_object hash, you can abstract it all to the <em>method_missing</em> method.  By passing in as an argument the key you want to retrieve you can set the method as follows:</p>
+
+<pre><code>def method_missing(key)  
+    ShippingHash.new(@data[“#{key}”]  
+end  
+</code></pre>
+
+<p>where <em>ShippingHash</em> is the class and <em>@data</em> is the instance variable (a hash) initialized upon creation of a new <em>ShippingHash</em> object.<br/>
+Below is the final code for the parsing program:</p>
+
+<pre><code>require 'yaml'  
+
+file = File.open("file_path/shipping.yaml")  
+data = YAML::load(file)  
+
+class ShippingHash  
+    def initialize(hash)  
+        @data = hash  
+    end  
+
+    def method_missing(key)  
+        ShippingHash.new(@data["#{key}"])  
+    end  
+
+    def first  
+        ShippingHash.new(@data[0])  
+    end  
+end  
+
+parse_object = ShippingHash.new(data)
+puts parse_object.product.first.sku.inspect  
+</code></pre>
+
+<p>Overwriting and using <em>method_missing</em>, which is considered metaprogramming, may seem like a great way to make your program more abstract, and use less code.  But it is naturally slow as it must first check the current class, and all parent classes for the method name called before running <em>method_missing</em>.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -513,6 +607,10 @@ Best of luck setting up ActionMailer in your own Rails app! Resources I found in
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/08/22/method-missing/">Method_missing: Do You Know Where Your Methods Are?</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/08/06/lets-set-up-actionmailer/">Lets Set Up ActionMailer</a>
       </li>
     
@@ -526,10 +624,6 @@ Best of luck setting up ActionMailer in your own Rails app! Resources I found in
     
       <li class="post">
         <a href="/blog/2013/06/19/hello-world/">Hello World</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/06/17/arduino-the-ruby-way/">Arduino the Ruby Way</a>
       </li>
     
   </ul>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Matt's Blog!]]></title>
+  <title><![CDATA[Matt's Blog]]></title>
   <link href="http://mschmaus201.github.io/atom.xml" rel="self"/>
   <link href="http://mschmaus201.github.io/"/>
-  <updated>2013-08-09T23:32:06-04:00</updated>
+  <updated>2013-08-22T09:47:20-04:00</updated>
   <id>http://mschmaus201.github.io/</id>
   <author>
     <name><![CDATA[Matt  Schmaus]]></name>
@@ -12,6 +12,73 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[method_missing: do you know where your methods are?]]></title>
+    <link href="http://mschmaus201.github.io/blog/2013/08/22/method-missing/"/>
+    <updated>2013-08-22T09:29:00-04:00</updated>
+    <id>http://mschmaus201.github.io/blog/2013/08/22/method-missing</id>
+    <content type="html"><![CDATA[<p>This final week at the Flatiron School we had someone come so we can partake in mock interviews.  What an experience.   This was the first time I had gone through a technical interview, but I learned a lot more coming out of it than I thought I would!  Best lesson was learning about <em>method_missing</em> in Ruby.</p>
+
+<h3>NoMethodError</h3>
+
+<p>Naturally, when you call an undefined method on a object, we’re all used to receiving this error:</p>
+
+<pre><code>NoMethodError: undefined method “#{method_name}” for "#{receiving_object_name}":“#{receiving_object_class}”  
+</code></pre>
+
+<p>But what exactly happens between the method being called and this error being raised?  If the current class does not contain the instance method being called, it checks if its parent class does.  If that class does not, it moves on up to that class’ parent class, all the way up until it reaches the outermost class: <em>BasicObject</em>.  <em>BasicObject</em> is the parent class for all classes in Ruby.  For more info on <em>BasicObject</em>, check out the Ruby docs <a href="http://www.ruby-doc.org/core-2.0/BasicObject.html">here</a>.  If that class does not contain the instance method called (which it most likely won’t because, by default, it’s a blank class), it will check the Kernel module.   If nothing comes up in the Kernel module, it will call <em>method_missing</em>.  By default, this is what raises <em>NoMethodError</em>, but of course Ruby graciously provides you the ability to override <em>method_missing</em>!</p>
+
+<h3><em>method_missing</em></h3>
+
+<p>In a way, <em>method_missing</em> is a safety net.  It provides you with a way to gracefully handle calling a method that doesn’t exist!</p>
+
+<p>The prompt for my mock interview can be found <a href="https://gist.github.com/wengzilla/e83f221f64077b635047">here</a>.  I was asked to import a YAML file, and make the following string of methods on data return the relevant value in the YAML file:</p>
+
+<pre><code>parse_object.product.first.sku  
+</code></pre>
+
+<p>This string of methods should be the equivalent of calling:</p>
+
+<pre><code>parse_object[“product”].first[“sku”]  
+</code></pre>
+
+<p>This is where method missing kicks in! Rather than having to define a method for every possible key in the parse_object hash, you can abstract it all to the <em>method_missing</em> method.  By passing in as an argument the key you want to retrieve you can set the method as follows:</p>
+
+<pre><code>def method_missing(key)  
+    ShippingHash.new(@data[“#{key}”]  
+end  
+</code></pre>
+
+<p>where <em>ShippingHash</em> is the class and <em>@data</em> is the instance variable (a hash) initialized upon creation of a new <em>ShippingHash</em> object.<br/>
+Below is the final code for the parsing program:</p>
+
+<pre><code>require 'yaml'  
+
+file = File.open("file_path/shipping.yaml")  
+data = YAML::load(file)  
+
+class ShippingHash  
+    def initialize(hash)  
+        @data = hash  
+    end  
+
+    def method_missing(key)  
+        ShippingHash.new(@data["#{key}"])  
+    end  
+
+    def first  
+        ShippingHash.new(@data[0])  
+    end  
+end  
+
+parse_object = ShippingHash.new(data)
+puts parse_object.product.first.sku.inspect  
+</code></pre>
+
+<p>Overwriting and using <em>method_missing</em>, which is considered metaprogramming, may seem like a great way to make your program more abstract, and use less code.  But it is naturally slow as it must first check the current class, and all parent classes for the method name called before running <em>method_missing</em>.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Lets Set Up ActionMailer]]></title>
