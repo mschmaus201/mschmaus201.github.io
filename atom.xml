@@ -4,7 +4,7 @@
   <title><![CDATA[Matt's Blog]]></title>
   <link href="http://mschmaus201.github.io/atom.xml" rel="self"/>
   <link href="http://mschmaus201.github.io/"/>
-  <updated>2013-09-12T15:31:13-04:00</updated>
+  <updated>2013-09-12T15:39:02-04:00</updated>
   <id>http://mschmaus201.github.io/</id>
   <author>
     <name><![CDATA[Matt  Schmaus]]></name>
@@ -18,7 +18,7 @@
     <link href="http://mschmaus201.github.io/blog/2013/09/12/date-standardizing-algorithm-a-csv-date-parser/"/>
     <updated>2013-09-12T14:45:00-04:00</updated>
     <id>http://mschmaus201.github.io/blog/2013/09/12/date-standardizing-algorithm-a-csv-date-parser</id>
-    <content type="html"><![CDATA[<p>So this interview process has had its up and downs, having graduated from the Flatiron School about three weeks ago.  And those ups can sway to downs within moments.  But the highlights have definitely been solving the problems that are thrown my way, notably parsing differently formatted dates in CSV’s and creating DateTime objects out of them.  This was the prompt emailed to me by the interviewer:</p>
+    <content type="html"><![CDATA[<p>So this interview process has had its up and downs, having graduated from the Flatiron School about three weeks ago.  And those ups can sway to downs within moments.  But the highlights have definitely been solving the problems that are thrown my way, notably parsing differently formatted dates in CSV’s and creating <em>DateTime</em> objects out of them.  This was the prompt emailed to me by the interviewer:</p>
 
 <h2>The Prompt</h2>
 
