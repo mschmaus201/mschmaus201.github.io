@@ -4,7 +4,7 @@
   <title><![CDATA[Matt's Blog]]></title>
   <link href="http://mschmaus201.github.io/atom.xml" rel="self"/>
   <link href="http://mschmaus201.github.io/"/>
-  <updated>2013-09-12T15:39:02-04:00</updated>
+  <updated>2013-10-15T10:39:39-04:00</updated>
   <id>http://mschmaus201.github.io/</id>
   <author>
     <name><![CDATA[Matt  Schmaus]]></name>
@@ -12,6 +12,66 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Rails Time Zones]]></title>
+    <link href="http://mschmaus201.github.io/blog/2013/10/15/rails-time-zones/"/>
+    <updated>2013-10-15T10:15:00-04:00</updated>
+    <id>http://mschmaus201.github.io/blog/2013/10/15/rails-time-zones</id>
+    <content type="html"><![CDATA[<p>Rails Time Zones I’ve recently been working on some freelance projects, one of which is building an online reservation system for a chain of soon to launch hair salons.  One of the deeper rabbit holes I ended up in was dealing with time zones.  What happens when the hair salons are located in different time zones?  What happens when users are in different time zones and make reservations?  What happens when a user is in one time zone and makes a reservation for a location in another time zone?</p>
+
+<p>  I barely realized I had any issue with time zones until I needed to list all remaining reservations for the day, using</p>
+
+<pre><code>reservation.to_date == Time.now.to_date &amp;&amp; reservation.time &gt;= Time.now  
+</code></pre>
+
+<p>from the method called on a location:</p>
+
+<pre><code>def todays_remaining_resevations  
+    res_array = Array.new  
+    self.reservations.each do |reservation|  
+        res_array &lt;&lt; "#{reservation.time.strftime("%I:%M %p")} (#{reservation.user.full_name})" if reservation.time.to_date == Time.zone.now.to_date &amp;&amp; reservation.time &gt; Time.zone.now  
+    end  
+    res_array.count != 0 ? res_array.sort! : "There are no remaining reservations for today"  
+end  
+</code></pre>
+
+<p>This was functioning properly, except that the reservations were being saved in a different time zone than Time.now was spitting out.</p>
+
+<p>  Rails does a lot to help, but there are still a number of things that are very confusing until you really dive deep into how it works.</p>
+
+<h2>Default Time Zone</h2>
+
+<p>First thing you should know is that all DateTime objects are stored in the database as UTC (Coordinated Universal Time).  By configuring the default time zone, Rails will use ActiveRecord to convert the data to the time zone you’ve designated.  To set the default time zone, in the config/application.rb file, set config.time_zone to the name of the time zone you’d like to be default.</p>
+
+<pre><code>config.time_zone = 'Eastern Time (US &amp; Canada)'  
+</code></pre>
+
+<p>To get a list of all the time zone names,  run:</p>
+
+<pre><code>rake time:zones:all  
+</code></pre>
+
+<p>in terminal.  Now, whenever something is saved, it will automatically be saved in UTC, but will be converted to UTC from your designated default time zone.  And since I had set the default time zone, I then changed the above line of code to:</p>
+
+<pre><code>reservation.to_date == Time.zone.now.to_date &amp;&amp; reservation.time &gt;= Time.zone.now  
+</code></pre>
+
+<h2>Multiple User Time Zones</h2>
+
+<p>So what happens if users make reservations from different time zones?  The user model should have an attribute for time zone (string).  That way, you can easily call <em>current_user.time_zone</em> when trying to determine what time zone a user is making a reservation from.  And with the knowledge of what time zone a location is in, you can easily make the appropriate adjustments!</p>
+
+<h2>Rails Code</h2>
+
+<p>So the way DateTime objects are created through a rails form, is that for each part of a date (ie month, day, year, hour, minute, etc), its given its own key in params.  For example, when a location is created an hours set in this project, <em>params[&ldquo;location&rdquo;][&ldquo;monday_open(1i)&rdquo;]</em> equals the month value, <em>params[&ldquo;location&rdquo;][&ldquo;monday_open(2i)&rdquo;]</em> equals the day value, <em>params[&ldquo;location&rdquo;][&ldquo;monday_open(3i)&rdquo;]</em> equals the year value, and so on.  Then, those pairs will instantiate <em>params[&ldquo;location&rdquo;][&ldquo;monday_open&rdquo;]</em> and passed into <em>Date.new(parameter)</em>.  Its actually pretty cool checking out the Rails code and see how this is done at the granular level!  Here&rsquo;s a <a href="https://github.com/rails/rails/blob/d90b4e2/activerecord/lib/active_record/base.rb#L1811">link</a> to the relevant code :)</p>
+
+<h4>Other great resources</h4>
+
+<p><a href="http://www.elabs.se/blog/36-working-with-time-zones-in-ruby-on-rails">Working with Time Zones in Ruby on Rails</a><br/>
+<a href="http://www.timeanddate.com/time/aboututc.html">About UTC</a><br/>
+<a href="http://railscasts.com/episodes/106-time-zones-revised">RailsCast #106: Time Zones (revised)</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Date Standardizing Algorithm: a CSV Date Parser]]></title>

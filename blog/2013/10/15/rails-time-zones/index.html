@@ -1,0 +1,262 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Rails Time Zones - Matt's Blog</title>
+  <meta name="author" content="Matt  Schmaus">
+
+  
+  <meta name="description" content="Rails Time Zones I’ve recently been working on some freelance projects, one of which is building an online reservation system for a chain of soon to &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://mschmaus201.github.io/blog/2013/10/15/rails-time-zones">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Matt's Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Matt's Blog</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:mschmaus201.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Rails Time Zones</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-15T10:15:00-04:00" pubdate data-updated="true">Oct 15<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Rails Time Zones I’ve recently been working on some freelance projects, one of which is building an online reservation system for a chain of soon to launch hair salons.  One of the deeper rabbit holes I ended up in was dealing with time zones.  What happens when the hair salons are located in different time zones?  What happens when users are in different time zones and make reservations?  What happens when a user is in one time zone and makes a reservation for a location in another time zone?</p>
+
+<p>  I barely realized I had any issue with time zones until I needed to list all remaining reservations for the day, using</p>
+
+<pre><code>reservation.to_date == Time.now.to_date &amp;&amp; reservation.time &gt;= Time.now  
+</code></pre>
+
+<p>from the method called on a location:</p>
+
+<pre><code>def todays_remaining_resevations  
+    res_array = Array.new  
+    self.reservations.each do |reservation|  
+        res_array &lt;&lt; "#{reservation.time.strftime("%I:%M %p")} (#{reservation.user.full_name})" if reservation.time.to_date == Time.zone.now.to_date &amp;&amp; reservation.time &gt; Time.zone.now  
+    end  
+    res_array.count != 0 ? res_array.sort! : "There are no remaining reservations for today"  
+end  
+</code></pre>
+
+<p>This was functioning properly, except that the reservations were being saved in a different time zone than Time.now was spitting out.</p>
+
+<p>  Rails does a lot to help, but there are still a number of things that are very confusing until you really dive deep into how it works.</p>
+
+<h2>Default Time Zone</h2>
+
+<p>First thing you should know is that all DateTime objects are stored in the database as UTC (Coordinated Universal Time).  By configuring the default time zone, Rails will use ActiveRecord to convert the data to the time zone you’ve designated.  To set the default time zone, in the config/application.rb file, set config.time_zone to the name of the time zone you’d like to be default.</p>
+
+<pre><code>config.time_zone = 'Eastern Time (US &amp; Canada)'  
+</code></pre>
+
+<p>To get a list of all the time zone names,  run:</p>
+
+<pre><code>rake time:zones:all  
+</code></pre>
+
+<p>in terminal.  Now, whenever something is saved, it will automatically be saved in UTC, but will be converted to UTC from your designated default time zone.  And since I had set the default time zone, I then changed the above line of code to:</p>
+
+<pre><code>reservation.to_date == Time.zone.now.to_date &amp;&amp; reservation.time &gt;= Time.zone.now  
+</code></pre>
+
+<h2>Multiple User Time Zones</h2>
+
+<p>So what happens if users make reservations from different time zones?  The user model should have an attribute for time zone (string).  That way, you can easily call <em>current_user.time_zone</em> when trying to determine what time zone a user is making a reservation from.  And with the knowledge of what time zone a location is in, you can easily make the appropriate adjustments!</p>
+
+<h2>Rails Code</h2>
+
+<p>So the way DateTime objects are created through a rails form, is that for each part of a date (ie month, day, year, hour, minute, etc), its given its own key in params.  For example, when a location is created an hours set in this project, <em>params[&ldquo;location&rdquo;][&ldquo;monday_open(1i)&rdquo;]</em> equals the month value, <em>params[&ldquo;location&rdquo;][&ldquo;monday_open(2i)&rdquo;]</em> equals the day value, <em>params[&ldquo;location&rdquo;][&ldquo;monday_open(3i)&rdquo;]</em> equals the year value, and so on.  Then, those pairs will instantiate <em>params[&ldquo;location&rdquo;][&ldquo;monday_open&rdquo;]</em> and passed into <em>Date.new(parameter)</em>.  Its actually pretty cool checking out the Rails code and see how this is done at the granular level!  Here&rsquo;s a <a href="https://github.com/rails/rails/blob/d90b4e2/activerecord/lib/active_record/base.rb#L1811">link</a> to the relevant code :)</p>
+
+<h4>Other great resources</h4>
+
+<p><a href="http://www.elabs.se/blog/36-working-with-time-zones-in-ruby-on-rails">Working with Time Zones in Ruby on Rails</a><br/>
+<a href="http://www.timeanddate.com/time/aboututc.html">About UTC</a><br/>
+<a href="http://railscasts.com/episodes/106-time-zones-revised">RailsCast #106: Time Zones (revised)</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Matt  Schmaus</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-15T10:15:00-04:00" pubdate data-updated="true">Oct 15<span>th</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://mschmaus201.github.io/blog/2013/10/15/rails-time-zones/" data-via="" data-counturl="http://mschmaus201.github.io/blog/2013/10/15/rails-time-zones/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/09/12/date-standardizing-algorithm-a-csv-date-parser/" title="Previous Post: Date Standardizing Algorithm: a CSV Date Parser">&laquo; Date Standardizing Algorithm: a CSV Date Parser</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/10/15/rails-time-zones/">Rails Time Zones</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/09/12/date-standardizing-algorithm-a-csv-date-parser/">Date Standardizing Algorithm: A CSV Date Parser</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/08/22/method-missing/">Method_missing: Do You Know Where Your Methods Are?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/08/06/lets-set-up-actionmailer/">Lets Set Up ActionMailer</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/23/phonegap-intro-part-1/">PhoneGap: Intro (Part 1)</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Matt  Schmaus -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
